@@ -1,0 +1,22 @@
+A list of things that we plan to implement in a later version of Notice(me senpai!)
+==================================================================================
+
+Design
+------
+
+Functionality
+-------------
+
+-Cleaner, better and more efficient code.
+-Forgotten password.
+-Implement Group/tag system so that you can filter which notes that we
+want to show on the home page.
+
+Bugfixes
+--------
+
+Other improvements
+------------------
+-"Remember me"-button at the login page.
+-Feedback from user to see what we can improve.
+

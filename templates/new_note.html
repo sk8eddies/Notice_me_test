@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>B-Baka!</title>
+    <link href="../static/css/style.css" rel="stylesheet" type="text/css">
+    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    <script src="../static/js/javascript.js" type="text/javascript"></script>
+    <link rel="shortcut icon" href="../static/img/icon_t1.png">
+    <script>
+        $(document).ready(function(){
+        var n = 0
+         });
+    </script>
+    <script>
+        $(document).ready(function(){
+            var backgrounds = [
+        "url('/static/img/note_background_t1.jpg')",
+        "url('/static/img/note_background_t2.jpg')",
+        "url('/static/img/note_background_t3.jpg')"
+        ]
+            for(i=0; i<backgrounds.length; i++){
+                if(i == {{ session['theme'] }}) {
+                    $(".theme_form_body").css("background-image", backgrounds[(i)]);
+                    break
+                }
+            }
+        });
+    </script>
+</head>
+<body class="form_body theme_form_body">
+    <div id="wrapper" class="noMargin noPadding">
+        <div class="form_container">
+            <form class="form" action="" method="post">
+                <input class="form_title" name="title" type="text" required="required" placeholder="Title" class="input_style" value="{{request.form.title}}">
+                <textarea class="form_content" name="content" type="text" required="required" placeholder="Content" class="input_style" value="{{request.form.content}}"></textarea>
+                <input class="form_submit" type="submit" value="Save note">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

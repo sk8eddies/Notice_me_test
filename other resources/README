@@ -1,0 +1,36 @@
+Notice(me senpai!)
+==================
+
+Notice(me senpai!) is an easy to use notepad. The main goal for the project is to create a simple
+web application that is a little silly and not so serious. We started this project because we
+needed something that you could use both on your smartphone and on your desktop computer.
+Most of the notepad apps are created for smartphone use and it is impossible to get access to your
+notes on a desktop. We are solving this problem since on Notice(me senpai!) everything is saved
+in a database that is stored on a web server. Hence all of the information is accessible on any device
+as long as you have stable internet connection.
+
+Features
+--------
+
+-Creating user(s)
+-Encrypted passwords
+-Logging in
+-Creating a note
+-Editing a note
+-Deleting a note
+-Modern touch
+-Awesome themes
+
+Support
+----------
+
+If you find any bugs or other issues send an email and a description of the bug/issue to
+the email adresses that are written below. Constructive feedback is also appreciated and can also
+be sent to the same mail. You can also send us an email if you want to get access to som part of
+the code.
+Email: contributeToNoticeMe@outlook.com
+
+Resources
+----------
+
+-www.we_need_a_we_page_for_docs.com

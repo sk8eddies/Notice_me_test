@@ -1,0 +1,496 @@
+
+
+/* =========================== GLOBAL =========================== */
+.bcWhiteT {  background-color: rgba(255, 255, 255, 0.75)} /*whitesmoke !KAWAII!*/
+.bcWhite {  background-color: whitesmoke} /*!KAWAII!*/
+.bcBright { background-color:#ffb2fd;} /*blue B2D7FF green B2FFB3 yellow FFDAB2 http://www.colorpicker.com/ffd366 */
+.bc {       background-color:#FF66DD;} /*blue 6691FF green 66FF87 yellow FFD366*/
+.bcDark {   background-color:#DC68C2;} /*blue 6888DC green 68DC82 yellow DCBC68*/
+.cWhite {   color: whitesmoke;}
+.cBright{   color:#ffb2fd;}
+.c{         color:#FF66DD;}
+.cDark{     color:#DC68C2;}
+
+.hide{
+    display: none;
+}
+.noMargin{
+    margin:0;
+}
+.noPadding{
+    padding:0;
+}
+.show-only-on-mobile{
+	display:none;
+}
+.show-only-on-desktop {
+	display:block;
+}
+@media screen and (max-width: 767px){
+.show-only-on-mobile{
+	display:block;
+}
+.show-only-on-desktop {
+	display:none;
+}
+}
+/* =========================== FONTS ========================== */
+@font-face {
+    font-family: 'amblelight';
+    src: url('../fonts/Amble-Light-webfont.eot');
+    src: url('../fonts/Amble-Light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Amble-Light-webfont.woff') format('woff'),
+         url('../fonts/Amble-Light-webfont.ttf') format('truetype'),
+         url('../fonts/Amble-Light-webfont.svg#amblelight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+*{
+    font-family: 'amblelight';
+}
+/* =========================== GENERAL ========================== */
+#wrapper{
+	margin: auto;
+	/*background-color:blueviolet;*/
+}
+header, aside, section, footer{
+    float:left;
+}
+.a_folder_ul, .a_folder_li, .s_doc_ul, .s_doc_li, .settings_menu_ul, .settings_menu_li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+/* =========================== INDEX (LOG-IN) ========================== */
+.body2{
+    background-image: url("../img/index_background2.jpg");
+
+}
+
+#container{
+    background: rgba(220, 104, 194, 0.5);
+    width: 30%;
+    height: 60vh;
+    min-height: 450px;
+    margin-left: 35%;
+    margin-top: 10%;
+}
+#cover{
+    width: 100%;
+    height: 100%;
+    /*background-color: rgba(255,102,221,0.5);*/
+}
+.index_img1{
+    width: 40%;
+    float: left;
+    margin-left: 30%;
+    margin-top: 5%;
+}
+.input_style{
+    float: left;
+    width: 70%;
+    height: 50px;
+    margin-left: 15%;
+    margin-top: 5%;
+    font-size: 1.5em;
+}
+#new_acc{
+    float: left;
+    text-align: center;
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 5%;
+    color: white;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+#new_acc:active{
+    color: white;
+    text-decoration: none;
+}
+
+/* =========================== NEW NOTE/EDIT NOTE =============== */
+.form_body{
+    /*background-image: url("/static/img/paper_fibers.png");*/
+    background-image: url("/static/img/note_background_t1.jpg");
+}
+.form_container{
+    /*width: 60vw;*/
+    height: 80vh;
+    margin: 10vh 0 0 -300px;
+    max-width: 600px;
+    background-color: white;
+}
+.form{
+    width: 100%;
+    height: 100%;
+    box-shadow: 2px 2px 4px 1px rgba(0,0,0,0.3);
+}
+.form_title{
+    width: 100%;
+    height: 50px;/*10%*/
+    box-sizing: border-box;
+    font-size: 2.5em;
+    resize: none;
+    border: none;
+    border-bottom: solid 2px #EEEEEE;
+    outline: none;
+}
+.form_content{
+    width: 100%;
+    height: 90%;/*85*/
+    /*margin-top: 5%;*/
+    box-sizing: border-box;
+    /*background-image: url("/static/img/lined_paper.png");*/
+    font-size: 1.8em;
+    resize: none;
+    overflow: auto;
+    border: none;
+    outline: none;
+    white-space: pre-wrap;
+}
+.form_submit{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 50px;
+    width: 100px;
+    font-family: "Courier", serif;
+}
+/* =========================== HEADER =========================== */
+header{
+    height: 100px;
+    width: 100%;
+    z-index: 2;
+    background-image: url("/static/img/header_background_t1.png"); /*!KAWAII!*/
+}
+.h_settings_img{
+    transition        : 0.5s ease-in-out;
+    -webkit-transition : 0.5s ease-in-out;
+    -moz-transition: 0.5s ease-in-out;
+    -o-transition: 0.5s ease-in-out;
+    -ms-transition: 0.5s ease-in-out;
+}
+.rotate{
+    /*transition        : 0.5s ease-in-out;*/
+    transform : rotate(90deg);
+    -webkit-transform : rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+}
+/* =========================== ASIDE ============================== */
+aside{
+    width: 300px;
+    box-sizing: border-box;
+}
+.a_folder_ul, .a_folder_li, .s_doc_ul, .s_doc_li{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.a_folder_ul {
+    padding: 10px 10px 0px 10px;
+
+}
+.a_folder_li {
+    float: left;
+    width: 280px;
+    height: 180px;
+    margin-bottom: 10px;
+}
+#n_curtain{
+    width: 300px;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    z-index: -1;
+}
+/* =========================== SECTION =========================== */
+section{
+    z-index: -2;
+    position: relative;
+}
+.s_doc_ul{
+    padding: 10px;
+}
+.s_doc_li{
+    float:left;
+    margin: 0px 0px 10px 0px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.s_doc_li{
+    box-shadow: 2px 2px 4px 1px rgba(0,0,0,0.3);
+}
+
+.a_folder_li{
+    box-shadow: 2px 2px 4px 1px rgba(0,0,0,0.2);
+}
+#settings_menu{
+    position: absolute;
+    top: 100px;
+    right: 0;
+    box-shadow:0px 5px 10px 5px rgba(0,0,0,0.2);
+    width:0;
+}
+.settings_menu_ul{
+    width: 300px;
+    padding: 10px;
+    padding-bottom: 0;
+    display: none;
+    box-sizing: border-box;
+}
+.settings_menu_li{
+    height: 100px;
+    width: 280px;
+    margin-bottom: 10px;
+    margin-right: 0;
+    display: none;
+    padding: 30px;
+    box-sizing: border-box;
+}
+.settings__logout{
+    height: 100px;
+    width: 100px;
+    float: right;
+    margin-top: -30px;
+    margin-right: -30px;
+}
+.settings__a{
+    font-size: 1.5em;
+    text-align: center;
+    color: black;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+.settings__a:active{
+    color:black;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+.s_doc_li_text {
+    height: 310px;
+    padding-top: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+.s_edit_note, .s_delete_note{
+    width: 50%;
+    float: right;
+    height: 30px;
+}
+.s__text_h2{
+    margin-top: 0;
+    font-size: 1.3em;
+}
+.s__text_p{
+    margin-bottom: 0;
+    background-color: transparent;
+    box-sizing: border-box;
+    font-size: 1.0em;
+    resize: none;
+    overflow: hidden;
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 100%;
+}
+/* =========================== FOOTER ============================ */
+footer{
+    height: 100px;
+    width: 100%;
+    clear: both;
+}
+/* ########################### MOBILE ########################### */
+@media screen and (max-width: 767px) {
+	/* =========================== INDEX (LOG-IN) ========================== */
+	#container{
+		width: 100%;
+		height: 100vh;
+		margin-left: 0%;
+		margin-top: 0%;
+		margin-bottom: 0%;
+	}
+	#cover{
+		width: 100%;
+		height: 100%;
+	}
+    /* =========================== NEW NOTE/EDIT NOTE =============== */
+    .form_body{
+        margin:0;
+    }
+    .form_container{
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        max-width: 100vw;
+        background-color: white;
+    }
+    .form{
+        width: 100%;
+        height: 100%;
+        box-shadow: 2px 2px 4px 1px rgba(0,0,0,0.3);
+    }
+    .form_title{
+        width: 100%;
+        height: 10vh;/*10%*/
+        box-sizing: border-box;
+        font-size: 2.5em;
+        resize: none;
+        border: none;
+        border-bottom: solid 2px #EEEEEE;
+        outline: none;
+    }
+    .form_content{
+        width: 100%;
+        height: 90vh;/*85*/
+        /*margin-top: 5%;*/
+        box-sizing: border-box;
+        font-size: 1.8em;
+        resize: none;
+        overflow: auto;
+        border: none;
+        outline: none;
+    }
+    .form_submit{
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 10vh;
+        width: 100px;
+        font-family: "Courier", serif;
+    }
+    /* =========================== HEADER =========================== */
+    header {
+        height: 15vw;
+        width: 100%;
+        top: 0;
+        position: fixed;
+    }
+    .h_button{
+        width: 15vw;
+        height: 15vw;
+        float: right;
+        margin-right: 0px;
+    }
+    .h_img{
+        width: 100%;
+        height: 100%;
+    }
+    #h_logo{
+        width: 30%;
+        float: left;
+        padding: 0 10px 0 10px;
+        box-sizing: border-box;
+    }
+    /* =========================== ASIDE ============================== */
+    aside {
+        width: 30%;
+        margin: 15vw 0 15vw 0;
+    }
+    #n_curtain {
+        width: 30%;
+    }
+    .a_folder_li {
+        width: 100%;
+        height: 50px;
+    }
+    /* =========================== SECTION =========================== */
+    section {
+        width: 70%;
+        margin: 15vw 0 15vw 0;
+    }
+    .s_doc_li {
+        width: 100%;
+        height: 110px;
+    }
+
+    .s_doc_ul{
+    }
+    #settings_menu{
+        top: 15vw;
+    }
+    .settings_menu_ul{
+        width: 100%;
+    }
+    .settings_menu_li {
+        width: 100%;
+    }
+    .s_doc_li_text {
+        height: 60px;
+        padding-top: 0;
+    }
+    .s_edit_note, .s_delete_note{
+        height: 20px;
+    }
+    .s__text_h2{
+        margin: 0;
+    }
+    .s__text_p{
+        margin: 0;
+    }
+    /* =========================== FOOTER ============================ */
+    footer {
+        height: 15vw;
+        width: 100%;
+        bottom: 0;
+        position: fixed;
+    }
+}
+/* ########################### DESKTOP ########################### */
+@media screen and (min-width: 768px){
+/* =========================== GENERAL ========================== */
+/* =========================== NEW NOTE/EDIT NOTE =============== */
+    .form_container {
+        position: absolute;
+        left: 50%;
+    }
+/* =========================== HEADER =========================== */
+    #h_shadow{
+        box-shadow:0px -10px 5px -5px black inset;
+        /*inset ger en skugga som ligger på div-en */
+        height: 100px;
+        width: 100%;
+        z-index: 3;
+        position: absolute;
+        top: 0;
+        opacity: 0.2;
+        pointer-events: none;
+    }
+    .h_button{
+        width: 100px;
+        height: 100px;
+        float: right;
+        margin-right: 10px;
+    }
+    .h_img{
+        width: 100%;
+        height: 100%;
+    }
+    #h_logo{
+        width: 161px;
+        height: 100px;
+        float: left;
+        padding: 0 10px 0 10px;
+        box-sizing: border-box;
+    }
+/* =========================== ASIDE ============================== */
+    aside{
+    }
+/* =========================== SECTION =========================== */
+    section {
+    }
+    .s_doc_ul{
+        padding: 10px 0 10px 10px;
+    }
+    .s_doc_li {
+        width: 260px;
+        height: 370px;
+        margin-right: 10px;
+    }
+/* =========================== FOOTER ============================ */
+    footer {
+    }
+}
