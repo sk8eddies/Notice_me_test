@@ -80,11 +80,20 @@ def redirect_tag_note(note_id):
 
     return redirect(url_for('new_tag'))
 
+
 @app.route('/new_tag', methods=['GET', 'POST'])
 @login_required
 @db_session
 def new_tag():
+    note_id = session['note_id']
+    current_note = Note[note_id]
+    if request.method == 'POST':
+        pass
+        # name = request.form['create_tag']
+        # print("Tag name: {0}. Note id: {1}".format(name, note_id))
+        # return redirect(url_for('home'))
     return render_template('new_tag.html')
+
 
 # --------------------------------------------- HOME ----------------------------------------------------
 @app.route('/home', methods=['GET', 'POST'])
