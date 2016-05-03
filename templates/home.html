@@ -85,7 +85,10 @@
                         <input type="submit" class="s_edit_note" value="Edit note">
                     </form>
                     <form action=note/{{ note.id }}/delete method="post">
-                        <input type="submit" class="s_delete_note" value="Delete note">
+                        <input type="submit" class="s_delete_note" value="Delete">
+                    </form>
+                    <form action=note/{{ note.id }}/tag method="post">
+                        <input type="submit" class="s_tag_note" value="Tag">
                     </form>
                 </li>
             {% else %}

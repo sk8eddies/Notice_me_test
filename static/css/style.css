@@ -61,6 +61,8 @@ header, aside, section, footer{
     margin: 0;
     padding: 0;
 }
+
+
 /* =========================== INDEX (LOG-IN) ========================== */
 .body2{
     background-image: url("../img/index_background2.jpg");
@@ -109,10 +111,43 @@ header, aside, section, footer{
     text-decoration: none;
 }
 
+/* =========================== CHANGE PASSWORD/NEW TAG ===========  */
+.ch_h1_big_center{
+    text-align: center;
+    color: #EEEEEE;
+}
+
+#ch_container{
+    background: rgba(220, 104, 194, 0.5);
+    width: 30%;
+    height: 30vh;
+    min-height: 450px;
+    margin-left: 35%;
+    margin-top: 10%;
+    box-sizing: border-box;
+    padding: 5px;
+}
+
+#nt_container{
+    background: rgba(220, 104, 194, 0.5);
+    width: 30%;
+    height: 20vh;
+    min-height: 300px;
+    margin-left: 35%;
+    margin-top: 10%;
+    box-sizing: border-box;
+    padding: 5px;
+}
+
+
 /* =========================== NEW NOTE/EDIT NOTE =============== */
 .form_body{
     /*background-image: url("/static/img/paper_fibers.png");*/
     background-image: url("/static/img/note_background_t1.jpg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 .form_container{
     /*width: 60vw;*/
@@ -276,8 +311,8 @@ section{
     box-sizing: border-box;
     overflow: hidden;
 }
-.s_edit_note, .s_delete_note{
-    width: 50%;
+.s_edit_note, .s_delete_note, .s_tag_note{
+    width: 33%;
     float: right;
     height: 30px;
 }
@@ -450,7 +485,7 @@ footer{
 /* =========================== HEADER =========================== */
     #h_shadow{
         box-shadow:0px -10px 5px -5px black inset;
-        /*inset ger en skugga som ligger på div-en */
+        /*inset ger en skugga som ligger pï¿½ div-en */
         height: 100px;
         width: 100%;
         z-index: 3;

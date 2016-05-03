@@ -32,21 +32,13 @@
 <body class="form_body theme_form_body">
     <span id="cover">
     <div id="wrapper">
-        <div id="ch_container">
+        <div id="nt_container">
             <!-- <img src="../static/img/notice_logo_t1.png" alt="Notice me logo" class="index_img1"> -->
-            <h1 class="ch_h1_big_center"> Change password </h1>
+            <h1 class="ch_h1_big_center"> Create a new tag </h1>
             <form action="" method="post">
-                <input name="password" type="password" required="required" placeholder="password" class="input_style" value="{{request.form.password}}">
-                <input name="confirm_password" type="password" required="required" placeholder="Confirm password" class="input_style" value="{{request.form.confirm_password}}">
-                <input type="submit" value="Change password" class="input_style">
+                <input name="create_tag" type="text" required="required" placeholder="name" class="input_style" value="{{request.form.create_tag}}">
+                <input type="submit" value="Create tag" class="input_style">
             </form>
-            {% if error %}
-                <p><strong>Error:</strong> {{ error }}
-            {% endif %}
-            <!-- This for loop displays all flashed messages in case there is more than one. !Potato! -->
-            {% for message in get_flashed_messages() %}
-                {{ message }}
-            {% endfor %}
         </div>
     </div>
     </span>

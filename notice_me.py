@@ -71,6 +71,21 @@ def edit_note():
     return render_template('edit_note.html', note=current_note, note_id=note_id)
 
 
+# ----------------------------------------TAG NOTE -------------------------------------------------------
+@app.route('/note/<note_id>/tag', methods=['POST'])
+@login_required
+@db_session
+def redirect_tag_note(note_id):
+    session['note_id'] = note_id
+
+    return redirect(url_for('new_tag'))
+
+@app.route('/new_tag', methods=['GET', 'POST'])
+@login_required
+@db_session
+def new_tag():
+    return render_template('new_tag.html')
+
 # --------------------------------------------- HOME ----------------------------------------------------
 @app.route('/home', methods=['GET', 'POST'])
 @login_required
