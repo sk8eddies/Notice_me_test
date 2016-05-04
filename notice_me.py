@@ -77,7 +77,6 @@ def edit_note():
 @db_session
 def redirect_tag_note(note_id):
     session['note_id'] = note_id
-
     return redirect(url_for('new_tag'))
 
 
@@ -86,7 +85,7 @@ def redirect_tag_note(note_id):
 @db_session
 def new_tag():
     note_id = session['note_id']
-    current_note = Note[note_id]
+    # current_note = Note[note_id]
     if request.method == 'POST':
         pass
         # name = request.form['create_tag']
