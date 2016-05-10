@@ -24,6 +24,7 @@ class User(db.Entity):
     password = Required(str)
     theme = Required(int)
     notes = Set("Note")
+    tags = Set('Tag')
 
     @classmethod
     def is_user_in_db(cls, sent_username):
@@ -203,6 +204,7 @@ class Note(db.Entity):
     user_id = Required(int)
     title = Required(str)
     content = Required(str)
+    tagging = Set('Tagging')
 
     @classmethod
     @db_session
@@ -238,6 +240,42 @@ class Note(db.Entity):
         note = Note[note_id]
         note.delete()
         commit()
+
+
+class Tag(db.Entity):
+    name = Required(str)
+    tagging = Set('Tagging')
+    user = Required(User)
+
+    @classmethod
+    def is_tag_in_db(cls, sent_tag_name):
+        return db.exists('* from Tag where name = $sent_tag_name')
+
+    @classmethod
+    def get_tag_id(cls, sent_tag_name):
+        return db.get('id from Tag where name = $sent_tag_name')
+
+
+class Note_Tagging(db.Entity):
+    note = Required(Note)
+    tag = Required(Tag)
+
+    @classmethod
+    def get_taggings(cls, user_id):             # TODO
+        notes = User.get_user_notes(sent_current_user_id=user_id)
+        taggings = []
+        for note in notes:
+            taggings += note.tagging
+
+        # taggings_id = db.select('id from Tagging where note in $notes_id')
+        # for id in taggings_id:
+        #     taggings.append(Tagging[id])
+
+        user_taggings = set(taggings)
+
+        print("{0}".format(user_taggings))
+
+        return user_taggings
 
 db.generate_mapping(create_tables=True)
 

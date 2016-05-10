@@ -85,12 +85,17 @@ def redirect_tag_note(note_id):
 @db_session
 def new_tag():
     note_id = session['note_id']
-    # current_note = Note[note_id]
+    current_note = Note[note_id]
     if request.method == 'POST':
-        pass
-        # name = request.form['create_tag']
-        # print("Tag name: {0}. Note id: {1}".format(name, note_id))
-        # return redirect(url_for('home'))
+        tag_name = request.form['create_tag']
+        print("Tag name: {0}. Note id: {1}. Exists: {2}".format(tag_name, note_id, Tag.is_tag_in_db(tag_name)))
+        if Tag.is_tag_in_db(sent_tag_name=tag_name):
+            new_tag = Tag[Tag.get_tag_id(sent_tag_name=tag_name)]
+            tagging = Tagging(tag=new_tag, note=current_note)
+        else:
+            new_tag = Tag(name=tag_name)
+            tagging = Tagging(tag=new_tag, note=current_note)
+        return redirect(url_for('home'))
     return render_template('new_tag.html')
 
 
@@ -103,11 +108,12 @@ def home():
     session['theme'] = User.get_user_theme(current_user_id)
 
     sorted_notes = User.get_user_notes(sent_current_user_id=current_user_id)
+    taggings = Tagging.get_taggings(user_id=current_user_id)
 
     if request.method == 'POST' and request.form['identifier'] == "theme":
         User.increase_user_theme(current_user_id)
         return redirect(url_for('home'))
-    return render_template('home.html', notes=sorted_notes)
+    return render_template('home.html', notes=sorted_notes, tags=taggings)
 
 
 @app.route('/new_note', methods=['GET', 'POST'])
