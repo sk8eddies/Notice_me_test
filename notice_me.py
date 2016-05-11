@@ -86,17 +86,25 @@ def redirect_tag_note(note_id):
 def new_tag():
     note_id = session['note_id']
     current_note = Note[note_id]
+    current_user = User[User.get_user_id(session['current_username'])]
     if request.method == 'POST':
         tag_name = request.form['create_tag']
         print("Tag name: {0}. Note id: {1}. Exists: {2}".format(tag_name, note_id, Tag.is_tag_in_db(tag_name)))
         if Tag.is_tag_in_db(sent_tag_name=tag_name):
-            new_tag = Tag[Tag.get_tag_id(sent_tag_name=tag_name)]
-            tagging = Tagging(tag=new_tag, note=current_note)
+            tag = Tag[Tag.get_tag_id(sent_tag_name=tag_name)]
+            tagging = NoteTagging(tag=tag, note=current_note)
         else:
-            new_tag = Tag(name=tag_name)
-            tagging = Tagging(tag=new_tag, note=current_note)
+            new_tag = Tag(name=tag_name, user=current_user)
+            tagging = NoteTagging(tag=new_tag, note=current_note)
         return redirect(url_for('home'))
     return render_template('new_tag.html')
+
+
+@app.route('/tag/<tag_id>/filter', methods=['POST'])
+@login_required
+@db_session
+def filter_notes_by_tag(tag_id):
+    return redirect(url_for('filtered_home', tag_id=tag_id))
 
 
 # --------------------------------------------- HOME ----------------------------------------------------
@@ -108,14 +116,25 @@ def home():
     session['theme'] = User.get_user_theme(current_user_id)
 
     sorted_notes = User.get_user_notes(sent_current_user_id=current_user_id)
-    taggings = Tagging.get_taggings(user_id=current_user_id)
+    tags = User.get_user_tags(sent_current_user_id=current_user_id)
 
     if request.method == 'POST' and request.form['identifier'] == "theme":
         User.increase_user_theme(current_user_id)
         return redirect(url_for('home'))
-    return render_template('home.html', notes=sorted_notes, tags=taggings)
+    return render_template('home.html', notes=sorted_notes, tags=tags)
 
 
+@app.route('/filtered_home/<tag_id>', methods=['GET', 'POST'])
+@login_required
+@db_session
+def filtered_home(tag_id):
+    current_user_id = User.get_user_id(session['current_username'])
+    filtered_notes = User.filter_notes_by_tag(current_tag_id=tag_id, current_user_id=current_user_id)
+    taggings = User.get_user_tags(sent_current_user_id=current_user_id)
+    return render_template('home.html', tags=taggings, notes=filtered_notes)
+
+
+# ----------------------------------------------- NEW NOTE -------------------------------------------------
 @app.route('/new_note', methods=['GET', 'POST'])
 @login_required
 @db_session

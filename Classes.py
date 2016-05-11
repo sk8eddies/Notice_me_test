@@ -187,6 +187,28 @@ class User(db.Entity):
 
         return sorted_notes
 
+    @classmethod
+    @db_session
+    def get_user_tags(cls, sent_current_user_id):
+        user = User[sent_current_user_id]
+        return user.tags
+
+    @classmethod
+    @db_session
+    def filter_notes_by_tag(cls, current_tag_id, current_user_id):
+        notes = User.get_user_notes(sent_current_user_id=current_user_id)
+        filtered_notes = []
+
+        print("sent tag id: {0}".format(current_tag_id))        # TODO filter lambda
+        for note in notes:
+            print(note.id)
+            print(note.tags.tag)
+            for tag in note.tags.tag:
+                print(tag.name)
+            if note.tags.tag.id == current_tag_id:
+                filtered_notes.append(note)
+        return filtered_notes
+
 
 class Note(db.Entity):
 
@@ -204,7 +226,7 @@ class Note(db.Entity):
     user_id = Required(int)
     title = Required(str)
     content = Required(str)
-    tagging = Set('Tagging')
+    tags = Set('NoteTagging')
 
     @classmethod
     @db_session
@@ -240,42 +262,34 @@ class Note(db.Entity):
         note = Note[note_id]
         note.delete()
         commit()
-
+    #
+    # @db_session
+    # def get_note_taggings(self):
+    #     sorted_taggins = []
+    #     taggings = db.select('')
+    #
+    #     for
 
 class Tag(db.Entity):
     name = Required(str)
-    tagging = Set('Tagging')
+    tagging = Set('NoteTagging')
     user = Required(User)
 
     @classmethod
+    @db_session
     def is_tag_in_db(cls, sent_tag_name):
         return db.exists('* from Tag where name = $sent_tag_name')
 
     @classmethod
+    @db_session
     def get_tag_id(cls, sent_tag_name):
         return db.get('id from Tag where name = $sent_tag_name')
 
 
-class Note_Tagging(db.Entity):
+class NoteTagging(db.Entity):
     note = Required(Note)
     tag = Required(Tag)
 
-    @classmethod
-    def get_taggings(cls, user_id):             # TODO
-        notes = User.get_user_notes(sent_current_user_id=user_id)
-        taggings = []
-        for note in notes:
-            taggings += note.tagging
-
-        # taggings_id = db.select('id from Tagging where note in $notes_id')
-        # for id in taggings_id:
-        #     taggings.append(Tagging[id])
-
-        user_taggings = set(taggings)
-
-        print("{0}".format(user_taggings))
-
-        return user_taggings
 
 db.generate_mapping(create_tables=True)
 

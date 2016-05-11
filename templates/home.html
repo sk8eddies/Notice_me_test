@@ -35,11 +35,13 @@
 <body class="noMargin noPadding bcWhite">
 <div id="wrapper" class="noMargin noPadding">
     <header class="bc theme_header">
-        <div id="h_logo" class="h_button"> <!--bcWhite !KAWAII!-->
-            <img src="../static/img/notice_logo_t1.png" alt="Notice me logo" class="h_img theme_img_1">
-            <img src="../static/img/notice_logo_t2.png" alt="Notice me logo" class="h_img theme_img_2">
-            <img src="../static/img/notice_logo_t3.png" alt="Notice me logo" class="h_img theme_img_3">
-        </div>
+        <a href="/home">
+            <div id="h_logo" class="h_button"> <!--bcWhite !KAWAII!-->
+                <img src="../static/img/notice_logo_t1.png" alt="Notice me logo" class="h_img theme_img_1">
+                <img src="../static/img/notice_logo_t2.png" alt="Notice me logo" class="h_img theme_img_2">
+                <img src="../static/img/notice_logo_t3.png" alt="Notice me logo" class="h_img theme_img_3">
+            </div>
+        </a>
         <div id="h_new_note" class="h_button bcWhiteT">
             <a href="/new_note">
                 <img src="../static/img/new_note_t1.png" alt="new document" class="h_img theme_img_1">
@@ -69,21 +71,15 @@
     <div id="h_shadow"></div>
     <aside class="bcBright">
         <ul class="a_tag_ul">
-            <a class="a_tag_li bcWhite" href="https://www.google.se/">
-                <li >
-                    <h1 class="a_tag_name"> Tag name </h1>
+            {% for tag in tags %}
+                <li>
+                    <form action=tag/{{ tag.id }}/filter method="post">
+                        <input type="submit" class="a_tag_li bcWhite" value="{{ tag.name }}">
+                    </form>
                 </li>
-            </a>
-            <a class="a_tag_li bcWhite" href="https://www.google.se/">
-                <li >
-                    <h1 class="a_tag_name"> Tag name2 </h1>
-                </li>
-            </a>
-            <a class="a_tag_li bcWhite" href="https://www.google.se/">
-                <li >
-                    <h1 class="a_tag_name"> Tag name3 </h1>
-                </li>
-            </a>
+            {% else %}
+                <li><em><!--You do not have any notes at this time. -->Baka! Create a tag!</em></li>
+            {% endfor %}
         </ul>
     </aside>
     <div id="n_curtain" class="bcBright"></div>
