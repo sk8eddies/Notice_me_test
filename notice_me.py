@@ -12,6 +12,7 @@ app = Flask(__name__)
 app.secret_key = "tomato"
 app.database = "notice_db.db"
 
+
 # ------------------------------------ LOGIN ------------------------------------
 def login_required(f):
     @wraps(f)
@@ -43,6 +44,7 @@ def login():
 
 # ------------------------------------------ EDITING NOTES ----------------------------------------
 @app.route('/note/<note_id>/edit', methods=['POST'])
+@app.route('/filtered_home/note/<note_id>/edit', methods=['POST'])
 @login_required
 @db_session
 def redirect_edit_note(note_id):
@@ -51,10 +53,10 @@ def redirect_edit_note(note_id):
 
 
 @app.route('/note/<note_id>/delete', methods=['POST'])
+@app.route('/filtered_home/note/<note_id>/delete', methods=['POST'])
 @login_required
 @db_session
-def redirect_delete_note(note_id):
-    session['note_id'] = note_id
+def delete_note(note_id):
     Note.delete_note(note_id=note_id)
     return redirect(url_for('home'))
 
@@ -73,6 +75,7 @@ def edit_note():
 
 # ----------------------------------------TAG NOTE -------------------------------------------------------
 @app.route('/note/<note_id>/tag', methods=['POST'])
+@app.route('/filtered_home/note/<note_id>/tag', methods=['POST'])
 @login_required
 @db_session
 def redirect_tag_note(note_id):
@@ -89,22 +92,34 @@ def new_tag():
     current_user = User[User.get_user_id(session['current_username'])]
     if request.method == 'POST':
         tag_name = request.form['create_tag']
-        print("Tag name: {0}. Note id: {1}. Exists: {2}".format(tag_name, note_id, Tag.is_tag_in_db(tag_name)))
-        if Tag.is_tag_in_db(sent_tag_name=tag_name):
+        if Tag.is_tag_in_db(sent_tag_name=tag_name) and Tag.is_tag_in_db_for_user(sent_tag_name=tag_name, sent_current_user_id=User.get_user_id(session['current_username'])):
             tag = Tag[Tag.get_tag_id(sent_tag_name=tag_name)]
             tagging = NoteTagging(tag=tag, note=current_note)
+        elif Tag.is_tag_in_db(sent_tag_name=tag_name) and not Tag.is_tag_in_db_for_user(sent_tag_name=tag_name, sent_current_user_id=User.get_user_id(session['current_username'])):
+            new_tag = Tag(name=tag_name, user=current_user, user_id=User.get_user_id(session['current_username']))
+            tagging = NoteTagging(tag=new_tag, note=current_note)
         else:
-            new_tag = Tag(name=tag_name, user=current_user)
+            new_tag = Tag(name=tag_name, user=current_user, user_id=User.get_user_id(session['current_username']))
             tagging = NoteTagging(tag=new_tag, note=current_note)
         return redirect(url_for('home'))
     return render_template('new_tag.html')
 
 
 @app.route('/tag/<tag_id>/filter', methods=['POST'])
+@app.route('/filtered_home/tag/<tag_id>/filter', methods=['POST'])
 @login_required
 @db_session
 def filter_notes_by_tag(tag_id):
     return redirect(url_for('filtered_home', tag_id=tag_id))
+
+
+@app.route('/tag/<tag_id>/delete', methods=['POST'])
+@app.route('/filtered_home/tag/<tag_id>/delete', methods=['POST'])
+@login_required
+@db_session
+def delete_tag(tag_id):
+    Tag.delete_tag(current_tag_id=tag_id)
+    return redirect(url_for('home'))
 
 
 # --------------------------------------------- HOME ----------------------------------------------------
@@ -130,12 +145,13 @@ def home():
 def filtered_home(tag_id):
     current_user_id = User.get_user_id(session['current_username'])
     filtered_notes = User.filter_notes_by_tag(current_tag_id=tag_id, current_user_id=current_user_id)
-    taggings = User.get_user_tags(sent_current_user_id=current_user_id)
-    return render_template('home.html', tags=taggings, notes=filtered_notes)
+    tags = User.get_user_tags(sent_current_user_id=current_user_id)
+    return render_template('home.html', tags=tags, notes=filtered_notes)
 
 
 # ----------------------------------------------- NEW NOTE -------------------------------------------------
 @app.route('/new_note', methods=['GET', 'POST'])
+@app.route('/filtered_home/new_note', methods=['GET', 'POST'])
 @login_required
 @db_session
 def new_note():

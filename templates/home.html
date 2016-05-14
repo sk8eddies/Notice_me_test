@@ -71,14 +71,20 @@
     <div id="h_shadow"></div>
     <aside class="bcBright">
         <ul class="a_tag_ul">
+        <li>
+            <a href="/home" class="a_tag_a bcWhite"> Home </a>
+        </li>
             {% for tag in tags %}
                 <li>
+                    <form action=tag/{{ tag.id }}/delete method="post">
+                         <input type="submit" class="a_tag_delete bcWhite" value="Delete Tag">
+                    </form>
                     <form action=tag/{{ tag.id }}/filter method="post">
                         <input type="submit" class="a_tag_li bcWhite" value="{{ tag.name }}">
                     </form>
                 </li>
             {% else %}
-                <li><em><!--You do not have any notes at this time. -->Baka! Create a tag!</em></li>
+                <li><em><!--You do not have any notes at this time. --> Baka! Create a tag!</em></li>
             {% endfor %}
         </ul>
     </aside>
@@ -89,6 +95,14 @@
                 <li class="s_doc_li bcBright">
                     <div class="s_doc_li_text">
                         <h2 class="s__text_h2" style="margin-top:0">{{ note.title }}</h2>
+                        <div class="note_tag_div">
+                            <p class="note_tag_p"> <strong> Tags: </strong>
+                                {% for tag in note.tags.tag %}
+                                <p class="note_tag_p"> {{ tag.name }}, </p>
+                                {% endfor %}
+                            </p>
+                        </div>
+
                         <textarea class="s__text_p" readonly="yes">{{ note.content }}</textarea>
                     </div>
                     <form action=note/{{ note.id }}/edit method="post">

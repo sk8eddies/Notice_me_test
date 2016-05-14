@@ -178,7 +178,7 @@ class User(db.Entity):
 
         sorted_notes = []
 
-        notes_id = db.select('id from Note order by id desc')
+        notes_id = db.select('id from Note order by id asc')
 
         for note_id in notes_id:
             note = Note[note_id]
@@ -196,17 +196,16 @@ class User(db.Entity):
     @classmethod
     @db_session
     def filter_notes_by_tag(cls, current_tag_id, current_user_id):
+        tag_id = int(current_tag_id)
         notes = User.get_user_notes(sent_current_user_id=current_user_id)
         filtered_notes = []
 
         print("sent tag id: {0}".format(current_tag_id))        # TODO filter lambda
         for note in notes:
-            print(note.id)
-            print(note.tags.tag)
             for tag in note.tags.tag:
-                print(tag.name)
-            if note.tags.tag.id == current_tag_id:
-                filtered_notes.append(note)
+                if tag.id == tag_id:
+                    filtered_notes.append(note)
+        print filtered_notes
         return filtered_notes
 
 
@@ -262,18 +261,13 @@ class Note(db.Entity):
         note = Note[note_id]
         note.delete()
         commit()
-    #
-    # @db_session
-    # def get_note_taggings(self):
-    #     sorted_taggins = []
-    #     taggings = db.select('')
-    #
-    #     for
+
 
 class Tag(db.Entity):
     name = Required(str)
     tagging = Set('NoteTagging')
     user = Required(User)
+    user_id = Required(int)
 
     @classmethod
     @db_session
@@ -282,8 +276,20 @@ class Tag(db.Entity):
 
     @classmethod
     @db_session
+    def is_tag_in_db_for_user(cls, sent_tag_name, sent_current_user_id):
+        return db.exists('* from Tag where name = $sent_tag_name') and db.exists('* from Tag where user_id=$sent_current_user_id')
+
+    @classmethod
+    @db_session
     def get_tag_id(cls, sent_tag_name):
         return db.get('id from Tag where name = $sent_tag_name')
+
+    @classmethod
+    @db_session
+    def delete_tag(cls, current_tag_id):
+        tag = Tag[current_tag_id]
+        tag.delete()
+        commit()
 
 
 class NoteTagging(db.Entity):
